@@ -1,18 +1,20 @@
 https://raw.githubusercontent.com/AngelGonePro/qbittorrent-docker/refs/heads/main/qbittorrent-tor.zip
 ```
-mkdir ~/qbittorrent-tor && \
-wget -O /tmp/qbittorrent-tor.zip https://raw.githubusercontent.com/AngelGonePro/nextcloud-docker/refs/heads/main/qbittorrent-tor && \
+mkdir -p ~/qbittorrent-tor && \
+wget -O /tmp/qbittorrent-tor.zip https://github.com/AngelGonePro/nextcloud-docker/archive/refs/heads/main.zip && \
 python3 - << 'EOF'
 import zipfile, os
 
 zip_path = "/tmp/qbittorrent-tor.zip"
-extract_to = "qbittorrent-tor"
+extract_to = os.path.expanduser("~/qbittorrent-tor")
 
 with zipfile.ZipFile(zip_path) as z:
     for member in z.namelist():
         parts = member.split("/", 1)
-        if len(parts) > 1:
-            target = os.path.join(extract_to, parts[1])
+        if len(parts) > 1 and parts[1].startswith("qbittorrent-tor/"):
+            relative = parts[1]
+            target = os.path.join(extract_to, relative[len("qbittorrent-tor/"):])
+
             if not member.endswith("/"):
                 os.makedirs(os.path.dirname(target), exist_ok=True)
                 with open(target, "wb") as f:
