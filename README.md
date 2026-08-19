@@ -1,7 +1,7 @@
 https://raw.githubusercontent.com/AngelGonePro/qbittorrent-docker/refs/heads/main/qbittorrent-tor.zip
 ```
 mkdir -p ~/qbittorrent-tor && \
-wget -O /tmp/qbittorrent-tor.zip https://github.com/AngelGonePro/nextcloud-docker/archive/refs/heads/main.zip && \
+wget -O /tmp/qbittorrent-tor.zip https://raw.githubusercontent.com/AngelGonePro/qbittorrent-docker/refs/heads/main/qbittorrent-tor.zip && \
 python3 - << 'EOF'
 import zipfile, os
 
