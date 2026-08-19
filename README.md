@@ -1,26 +1,17 @@
 https://raw.githubusercontent.com/AngelGonePro/qbittorrent-docker/refs/heads/main/qbittorrent-tor.zip
 ```
+rm -rf ~/qbittorrent-tor && \
 mkdir -p ~/qbittorrent-tor && \
-wget -O /tmp/qbittorrent-tor.zip https://raw.githubusercontent.com/AngelGonePro/qbittorrent-docker/refs/heads/main/qbittorrent-tor.zip && \
-python3 - << 'EOF'
-import zipfile, os
-
-zip_path = "/tmp/qbittorrent-tor.zip"
-extract_to = os.path.expanduser("~/qbittorrent-tor")
-
-with zipfile.ZipFile(zip_path) as z:
-    for member in z.namelist():
-        parts = member.split("/", 1)
-        if len(parts) > 1 and parts[1].startswith("qbittorrent-tor/"):
-            relative = parts[1]
-            target = os.path.join(extract_to, relative[len("qbittorrent-tor/"):])
-
-            if not member.endswith("/"):
-                os.makedirs(os.path.dirname(target), exist_ok=True)
-                with open(target, "wb") as f:
-                    f.write(z.read(member))
-EOF
-rm /tmp/qbittorrent-tor.zip
+wget -q -O /tmp/qbittorrent-tor.zip https://raw.githubusercontent.com/AngelGonePro/qbittorrent-docker/refs/heads/main/qbittorrent-tor.zip && \
+unzip -q /tmp/qbittorrent-tor.zip -d ~ && \
+rm /tmp/qbittorrent-tor.zip && \
+cd ~/qbittorrent-tor && \
+ls -la
+```
+```
+mkdir -p /root/data/Downloads
+chown 82:65600 /root/data/Downloads
+chmod 2775 /root/data/Downloads
 ```
 ```
 cd ~/qbittorrent-tor
