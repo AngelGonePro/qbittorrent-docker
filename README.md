@@ -30,3 +30,4 @@ nano .env      # set NC_TRUSTED_PROXIES to your proxy VM's IP, set NC_PORT
 ```
 docker compose up -d --build
 ```
+The WebUI login is a random generated password on first boot, not a default — pull it from `docker compose logs qbittorrent`.
