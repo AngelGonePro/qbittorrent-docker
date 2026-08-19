@@ -23,5 +23,10 @@ EOF
 rm /tmp/qbittorrent-tor.zip
 ```
 ```
+cd ~/qbittorrent-tor
+cp .env.example .env
+nano .env      # set NC_TRUSTED_PROXIES to your proxy VM's IP, set NC_PORT
+```
+```
 docker compose up -d --build
 ```
